@@ -73,7 +73,7 @@ func main() {
 		switch update.Message.Command() {
 		case "start":
 			msg.Text = ordisQuotes[rand.Intn(len(ordisQuotes))]
-		case "quotes":
+		case "quote":
 			msg.Text = ordisQuotes[rand.Intn(len(ordisQuotes))]
 		case "latest":
 			news := api.GetNews()
@@ -93,8 +93,14 @@ func main() {
 		case "cetus":
 			cetus := api.GetCetusCycle()
 			msg.Text = fmt.Sprintf("<b>Cetus (Plains of Eidolon)</b>\nCurrent state:\t%s\nTime left:\t<b>%s</b>", cetus.GetCurrentState(), cetus.TimeLeft)
-		// case "alerts":
-		// case "nightwave":
+		case "nightwave":
+			nw := api.GetNightwaveInfo()
+			var text string
+			text += fmt.Sprintf("<b>Nightwave Challenges Season %d</b>\n\n", nw.Season)
+			for i := 0; i < len(nw.ActiveChallenges); i++ {
+				text += fmt.Sprintf("<b>%d</b> [%s]\n<i>%s</i>\n\n", nw.ActiveChallenges[i].Reputation, nw.ActiveChallenges[i].Title, nw.ActiveChallenges[i].Desc)
+			}
+			msg.Text = text
 		// case "fissures":
 		default:
 			msg.Text = ordisQuotes[0]

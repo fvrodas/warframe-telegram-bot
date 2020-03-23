@@ -56,3 +56,15 @@ func (api API) GetNews() []models.News {
 	log.Print("JSON Unmarshalled", news)
 	return news
 }
+
+// GetNightwaveInfo : Retrieves the Nightwave information
+func (api API) GetNightwaveInfo() models.Nightwave {
+	var nightwave models.Nightwave
+	data, err := api.client.Get("/nightwave", api.platform, api.language)
+	if err != nil {
+		log.Print("Request Error", err)
+	}
+	json.Unmarshal([]byte(data), &nightwave)
+	log.Print("JSON Unmarshalled", nightwave)
+	return nightwave
+}

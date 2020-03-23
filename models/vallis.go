@@ -12,7 +12,7 @@ type Vallis struct {
 func (vallis Vallis) GetCurrentState() string {
 	if vallis.IsWarm {
 		return "Warm \U0001F525"
-	} else {
-		return "Cold \U00002744"
 	}
+	return "Cold \U00002744"
+
 }

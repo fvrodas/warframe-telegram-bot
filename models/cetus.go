@@ -16,7 +16,6 @@ type Cetus struct {
 func (cetus Cetus) GetCurrentState() string {
 	if cetus.IsDay {
 		return "Day \U0001F31E"
-	} else {
-		return "Night \U0001F31A"
 	}
+	return "Night \U0001F31A"
 }
