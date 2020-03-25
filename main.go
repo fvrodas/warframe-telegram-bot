@@ -1,43 +1,33 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"math/rand"
+	"os"
 	"time"
 
 	"./warframe"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-func boolToRedeable(b bool) string {
-	if b {
-		return "Yes"
+func loadQuotes() []string {
+	quotes, err := ioutil.ReadFile("quotes.json")
+	if err != nil {
+		panic(err)
 	}
-	return "No"
+	var result []string
+	json.Unmarshal(quotes, &result)
+	return result
 }
 
 func main() {
-	ordisQuotes := [16]string{
-		"Operator? Ordis wonders... what are you thinking about?",
-		"I've been thinking, Operator...I thought you'd want to know.",
-		"Operator, I hope you are comfortable? No...we do not seem to have any seats.",
-		"Everything in Ordis, Operator? Is that a pun?! Hmm.... I will attempt to bypass this fault.",
-		"Ordis has been counting stars, Operator. All accounted for.",
-		"Operator, I will never betray you. I will keep the Orbiter hidden in the void. You can count on me!",
-		"Operator, I've been thinking. My misplaced memories and damaged communication systems. What if...Ordis did those things?",
-		"Operator, were you visualizing a bloody battle? -Me too!",
-		"Ordis is hap - angry. Hmm, I may require maintenance after all.",
-		"Operator, the system needs you. Will you begin another mission?",
-		"Operator! Did you hear that? It said-- Cosmic background radiation is a riot!",
-		"Stand by while I analyze the intelligence profile of the Grineer. Error, not a number! Did the Operator enjoy this witticism?",
-		"Do you remember the Old War, Operator? Ordis seems to have... misplaced those memories.",
-		"Do not lift the veil. Do not show the door. Do not split the dream.",
-		"Maintain the habitat. Maintain the Operator. Mobilize the Tenno.",
-		"You are the Tenno. You are the Operator. Ordis is the Cephalon. Ordis is the ship.",
-	}
 
-	bot, err := tgbotapi.NewBotAPI("***REMOVED***")
+	ordisQuotes := loadQuotes()
+
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_API_TOKEN"))
 	if err != nil {
 		panic(err)
 	}
