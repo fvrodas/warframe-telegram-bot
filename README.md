@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 
-Unofficial Warframe Telegram bot made with Golang. It provides a few world status information such as Cetus Cycle, Orb Vallis Cycle, News and Nightwave challenges.
+Unofficial Warframe Telegram bot made with Golang. It provides some world status information such as Cetus Cycle, Orb Vallis Cycle, News and Nightwave challenges.
 
 It's powered by [warframestat.us](https://warframestat.us) API. 
 
